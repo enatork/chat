@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <script src='http://code.jquery.com/jquery-1.6.1.min.js'></script>
+  </head>
+  <body>
+    <input type="button" onclick="leave()" style="width:100px" value="leave">
+    <input type="button" onclick="join()" style="width:100px" value="join">
+    <iframe id="iframe" width="1000" height="1000" src="/eui.html?room=abc"></iframe>
+
+    <script>
+      function leave() {
+          var iframe = document.getElementById('iframe').contentWindow;
+          iframe.postMessage('leave', 'http://localhost:3000/eui.html?room=abc');
+      }
+      function join() {
+          var iframe = document.getElementById('iframe').contentWindow;
+          iframe.postMessage('join', 'http://localhost:3000/eui.html?room=abc');
+      }
+    </script>
+  </body>
+</html>

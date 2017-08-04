@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <script src='http://code.jquery.com/jquery-1.6.1.min.js'></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="left-sidebar">
+        <ul id="queue-block">
+          
+        </ul>
+      </div>
+      <div id="chat-body">
+        <div id="activeUser"></div>
+        <ul id="messages"></ul>
+      </div>
+      <div id="notify-type"></div>
+      <div id="chat-form">
+        <form id="text-submit" action="">
+          <div>
+            <input id="m" autocomplete="off" />
+            <button id=""id="send-text-btn">Send</button>
+          </div>
+        </form>
+        <form id="image-submit" action="">
+          <div id="img-upload-container">
+            <div>
+              <input type="file" id="imagefile" accept="image/*">
+              <p id="file-name"></p>
+            </div>
+            <button id="send-image-btn">Send Image</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="client.js">
+    </script>
+    <script>
+      $(function(){
+        var socket = io();
+        socket.on('room add', function(msg){
+          var ele = $('#queue-block');
+          ele.empty();
+
+          msg.rooms.forEach(function(room, $index){
+            var href = window.location.origin + '?room=' + room + '&name=CSM' ;
+            let state = window.roomName === room ? 'active' : 'enqueue';
+            ele.append($('<li id="queue-block-list-' + $index + '">').append($('<div class="' + state + '">').append($("<p>").text(room))).attr('data-room', href));
+            $('#queue-block-list-' + $index).on('click', function(evt){
+                window.location = $(evt.currentTarget).attr('data-room');
+            }.bind(this));
+          });
+        });
+        socket.on('room removed', function(room){
+          var urlParams = new URLSearchParams(window.location.search);
+            
+          roomName = urlParams.get('room'); 
+          if(roomName === room){
+            window.location.href = window.location.origin;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

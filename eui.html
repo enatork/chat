@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <script src='http://code.jquery.com/jquery-1.6.1.min.js'></script>
+</head>
+<body>
+<div class="eui-n" id="container">
+    <div class="eui-chat" id="chat-body">
+    <div id="activeUser"></div>
+        <ul id="messages"></ul>
+    </div>
+    <div id="notify-type"></div>
+    <div class="eui-chat" id="chat-form">
+        <form id="text-submit" action="">
+            <div>
+                <input id="m" autocomplete="off" />
+                <button id=""id="send-text-btn">Send</button>
+            </div>
+        </form>
+        <form id="image-submit" action="">
+            <div id="img-upload-container">
+                <div>
+                    <input type="file" id="imagefile" accept="image/*">
+                    <p id="file-name"></p>
+                </div>
+                <button id="send-image-btn">Send Image</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="client.js">
+</script>
+<script type="text/javascript">
+    $(function(){
+        var socket = io();
+        var listener = function(event){
+            if(event.data === 'leave'){
+                var urlParams = new URLSearchParams(window.location.search);
+            
+                roomName = urlParams.get('room'); 
+                socket.emit('leave room', roomName);    
+            }
+            else{
+                window.location.reload();
+            }
+            
+        };
+        window.removeEventListener("message", listener, true);
+        window.addEventListener("message", listener, true);
+
+
+        jQuery(window).bind(
+            "beforeunload", 
+            function() { 
+
+                var urlParams = new URLSearchParams(window.location.search);
+            
+                roomName = urlParams.get('room'); 
+                socket.emit('leave room', roomName);
+            });
+      });   
+</script>
+</body>
+</html>

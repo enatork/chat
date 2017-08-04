@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body, #container, #left-sidebar {
+    height: 100%
+}
+body {
+    font: 13px Helvetica, Arial;
+}
+#container {
+    min-width: 950px;
+}
+#left-sidebar {
+    display: inline-flex;
+    flex-direction: column;
+    width: 15%;
+    background-color: #F8F8F8;
+    border-right: 1px solid darkgray;
+    position: fixed;
+    box-shadow: 1px 0 4px #888888;
+    z-index: 99;
+}
+#queue-block li {
+    cursor: pointer;
+    box-shadow: 0px 2px 0.5px #999;
+}
+#queue-block li:active {
+    box-shadow: 0px 1px 0.5px #999;
+}
+#queue-block li > div {
+    width: 100%;
+    background-color: #D8D8D8;
+    padding: 1rem;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin: .25rem 0;
+}
+#queue-block li > div.active {
+    background-color: #7AC65B;
+    font-size: 14px;
+}
+#queue-block li > div.enqueue {
+    background-color: #fbaf36;
+}
+#chat-body {
+    display: inline-flex;
+    margin-left: 15%;
+    width:85%;
+}
+#chat-form {
+    background: #002061;
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 85%;
+    margin-left: 15%;
+}
+form input {
+    border: 0;
+    padding: 10px;
+    width: 90%;
+    margin-right: .5%;
+}
+form button {
+    width: 9%;
+    background: #add3f2;
+    border: none;
+    padding: 10px;
+}
+form button:hover {
+    background: #90b6d5;
+}
+form button:active {
+    background: #1469be;
+}
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-y: scroll;
+    height: 1241px;
+    background-color: #fff;
+}
+#messages li {
+    padding: 5px 20px;
+    position: relative;
+}
+#messages li:nth-child(odd) {
+    background: #eee;
+}
+#img-upload-container {
+    margin-top: .5rem;
+}
+#img-upload-container > div > input {
+    width: 6rem;
+}
+#img-upload-container > div {
+    width: 90%;
+    display: inline-block;
+    margin-right: .5%;
+}
+#file-name {
+    color: #fff;
+    display: inline-block;
+}
+.uploaded-img {
+    max-width: 500px;
+    width: 100%;
+}
+
+.eui-chat {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+#timestamp {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #666;
+}
+#notify-type {
+    width: 35%;
+    height: 35px;
+    background-color: #ccc;
+    position: relative;
+    left: 15%;
+    bottom: 65px;
+    display: none;
+}
+#notify-type p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+}
+.eui-n #notify-type p {
+    left:0;
+}
